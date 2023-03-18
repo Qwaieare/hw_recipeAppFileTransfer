@@ -12,9 +12,9 @@ public class IngredientServiceImpl implements IngredientService {
     private static Long idIng = 0L;
 
     @Override
-    public Ingredient addNewIngredient(Ingredient ingredient) {
-        ingredientsL.putIfAbsent(idIng++, ingredient);
-        return ingredient;
+    public Long addNewIngredient(Ingredient ingredient) {
+        ingredientsL.putIfAbsent(idIng, ingredient);
+        return idIng++;
     }
 
     @Override
@@ -29,7 +29,7 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     public Ingredient putIngredient(Long idIng, Ingredient ingredient) {
-        ingredientsL.put(idIng, ingredient);
+        ingredientsL.putIfAbsent(idIng, ingredient);
         return ingredient;
     }
     @Override

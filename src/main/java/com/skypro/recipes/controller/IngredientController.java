@@ -21,22 +21,21 @@ import java.util.Map;
 public class IngredientController {
 
     private IngredientService ingredientService;
-
     public IngredientController(IngredientService ingredientService) {
         this.ingredientService = ingredientService;
     }
 
 
-    @GetMapping("/getingredient")
-    public Ingredient getIngredient(@RequestParam Long idIng) {
-          return ingredientService.getIngredient(idIng);
+    @GetMapping("/{idIng}")
+    public ResponseEntity<Ingredient> getIngredient(@PathVariable Long idIng) {
+        Ingredient ingredient1 = ingredientService.getIngredient(idIng);
+        if (ingredient1 == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(ingredient1 );
     }
 
 
-    @PostMapping("/addingredient")
-    public Ingredient addNewIngredient(@RequestParam Ingredient ingredient) {
-        return ingredientService.addNewIngredient(ingredient);
-    }
 
     @GetMapping
     @ApiResponses(value = {
@@ -60,7 +59,16 @@ public class IngredientController {
         return ResponseEntity.ok(ingredientsL);
     }
 
-    @PutMapping
+
+
+    @PostMapping
+    public ResponseEntity<Long> addNewIngredient(@RequestBody Ingredient ingredient) {
+        Long idIng = ingredientService.addNewIngredient(ingredient);
+        return ResponseEntity.ok(idIng);
+    }
+
+
+    @PutMapping("/{idIng}")
     @Parameters(value = {
             @Parameter(name = "idIng", example = "ingredient")
     }
@@ -72,7 +80,8 @@ public class IngredientController {
         }
         return ResponseEntity.ok(ingredient);
     }
-    @DeleteMapping
+
+    @DeleteMapping("/{idIng}")
     public ResponseEntity<Void> deleteIngredient(@PathVariable Long idIng) {
         if (ingredientService.deleteIngredient(idIng)) {
             return ResponseEntity.ok().build();

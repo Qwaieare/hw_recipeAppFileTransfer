@@ -1,21 +1,20 @@
 package com.skypro.recipes.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping
 public class InfoController {
 
     @GetMapping
-   public String hello() {
+    @RequestMapping
+   public String helloWorld() {
         return "запущено";
     }
 
-    @GetMapping("/info")
-    public String info() {
-        return "Информация о проекте";
+    @GetMapping("/path/to/info")
+    public String info(@RequestParam String info) {
+        return info + "Информация о проекте";
     }
 
 }

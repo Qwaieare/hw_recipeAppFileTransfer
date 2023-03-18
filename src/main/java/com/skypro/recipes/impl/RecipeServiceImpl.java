@@ -8,7 +8,6 @@ import com.skypro.recipes.service.RecipeService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -17,16 +16,17 @@ import java.util.TreeMap;
 
     private static Map<Long, Recipe> recipeL = new TreeMap<>();
     private static Long idRec = 0L;
-     final private FilesService filesService;
+    private final FilesService filesService;
 
     public RecipeServiceImpl(FilesService filesService) {
         this.filesService = filesService;
     }
 
     @Override
-    public Recipe addNewRecipe(Recipe recipe) {
-        recipeL.putIfAbsent(idRec++, recipe);
-        return recipe;
+    public Long addNewRecipe(Recipe recipe) {
+        recipeL.putIfAbsent(idRec, recipe);
+        saveToFile();
+        return idRec++;
     }
 
     @Override
@@ -36,7 +36,6 @@ import java.util.TreeMap;
 
     @Override
     public Map<Long, Recipe> getAllRecipe() {
-        saveToFile();
         return recipeL;
     }
 
@@ -49,7 +48,15 @@ import java.util.TreeMap;
 
     @Override
     public boolean deleteRecipe(Long idRec) {
-         return recipeL.remove(idRec) != null;
+        saveToFile();
+        return  recipeL.remove(idRec) != null;
+    }
+
+    @Override
+    public boolean deleteAllRecipe() {
+        recipeL = new TreeMap<>();
+        saveToFile();
+        return false;
     }
 
     // методы для json
@@ -63,18 +70,24 @@ import java.util.TreeMap;
     }
 
     private void readFromFile() {
-     String json =  filesService.readFromFile();
+         String json = filesService.readFromFile();
         try {
             recipeL = new ObjectMapper().readValue(json, new TypeReference<TreeMap<Long, Recipe>>() {
-         });
+            });
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
     }
-    @PostConstruct
-    private void init() {
-        readFromFile();
+
+        @PostConstruct
+        private void init () {
+            readFromFile();
+        }
     }
 
-}
+
+
+
+
+
 

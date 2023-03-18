@@ -4,7 +4,7 @@ import com.skypro.recipes.model.Recipe;
 import java.util.Map;
 
 public interface RecipeService {
-    Recipe addNewRecipe(Recipe recipe);
+    Long addNewRecipe(Recipe recipe);
     Recipe getRecipe(Long idRec);
 
     Map<Long, Recipe> getAllRecipe();
@@ -14,4 +14,5 @@ public interface RecipeService {
     boolean deleteRecipe(Long idRec);
 
 
+    boolean deleteAllRecipe();
 }

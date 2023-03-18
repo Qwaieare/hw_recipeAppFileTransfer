@@ -14,7 +14,7 @@ public class FilesServiceImpl implements FilesService {
     @Value("${path.to.data.file}")
     private String dataFilePath;
 
-    @Value("${name.of.data.file}")
+   @Value("${name.of.data.file}")
     private String dataFileName;
 
     @Override
@@ -24,6 +24,7 @@ public class FilesServiceImpl implements FilesService {
             Files.writeString(Path.of(dataFilePath, dataFileName), json);
             return true;
         } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -37,7 +38,7 @@ public class FilesServiceImpl implements FilesService {
         }
     }
 
-    @Override
+
     public boolean cleanDataFile() { // метод удаляет файлы и создает пустые
         try {
             final Path path = Path.of(dataFilePath, dataFileName);
