@@ -4,7 +4,13 @@ public interface FilesService {
 
   boolean saveToFile(String json);
 
+  boolean saveToFile1(String json);
+
   String readFromFile();
 
-    boolean cleanDataFile();
+  String readFromFile1();
+
+  boolean cleanDataFile();
+
+  boolean cleanDataFile1();
 }

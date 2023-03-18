@@ -13,9 +13,11 @@ public class FilesServiceImpl implements FilesService {
 
     @Value("${path.to.data.file}")
     private String dataFilePath;
-
    @Value("${name.of.data.file}")
     private String dataFileName;
+
+    @Value("${name.of.data.file1}")
+    private String dataFile1Name;
 
     @Override
     public boolean saveToFile(String json) { // метод принимает и сохраняет информацию, записывает строку в файл
@@ -28,6 +30,21 @@ public class FilesServiceImpl implements FilesService {
             return false;
         }
     }
+
+    @Override
+    public boolean saveToFile1(String json) { // метод принимает и сохраняет информацию, записывает строку в файл
+        try {
+            cleanDataFile1();
+            Files.writeString(Path.of(dataFilePath, dataFile1Name), json);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+
     @Override
     public String readFromFile() {  /// метод читает из файла
         try {
@@ -38,10 +55,33 @@ public class FilesServiceImpl implements FilesService {
         }
     }
 
+    @Override
+    public String readFromFile1() {  /// метод читает из файла
+        try {
+            return Files.readString(Path.of(dataFilePath, dataFile1Name));
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 
+@Override
     public boolean cleanDataFile() { // метод удаляет файлы и создает пустые
         try {
             final Path path = Path.of(dataFilePath, dataFileName);
+            Files.deleteIfExists(path);
+            Files.createFile(path);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean cleanDataFile1() { // метод удаляет файлы и создает пустые
+        try {
+            final Path path = Path.of(dataFilePath, dataFile1Name);
             Files.deleteIfExists(path);
             Files.createFile(path);
             return true;
