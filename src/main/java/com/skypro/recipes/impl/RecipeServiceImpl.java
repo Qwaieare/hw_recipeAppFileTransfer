@@ -76,7 +76,6 @@ public class RecipeServiceImpl implements RecipeService {
             recipeL = new ObjectMapper().readValue(json, new TypeReference<TreeMap<Long, Recipe>>() {
             });
         } catch (JsonMappingException e) {
-
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

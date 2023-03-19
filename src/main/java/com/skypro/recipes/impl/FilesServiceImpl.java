@@ -9,16 +9,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-@Service
-public class FilesServiceImpl implements FilesService {
+     @Service
+    public class FilesServiceImpl implements FilesService  {
 
     @Value("${path.to.data.file}")
     private String dataFilePath;
-    @Value("${name.of.data.file}")
-    private String dataFileName; // для рецептов
-
+   @Value("${name.of.data.file}")
+    private String dataFileName;
     @Value("${name.of.data.file1}")
-    private String dataFile1Name; // для ингредиентов
+    private String dataFile1Name;
+
 
     @Override
     public boolean saveToFile(String json) { // метод принимает и сохраняет информацию, записывает строку в файл
@@ -44,8 +44,6 @@ public class FilesServiceImpl implements FilesService {
         }
     }
 
-
-
     @Override
     public String readFromFile() {  /// метод читает из файла
         try {
@@ -65,6 +63,7 @@ public class FilesServiceImpl implements FilesService {
             throw new RuntimeException(e);
         }
     }
+
 
     @Override
     public boolean cleanDataFile() { // метод удаляет файлы и создает пустые
@@ -91,15 +90,15 @@ public class FilesServiceImpl implements FilesService {
             return false;
         }
     }
-
     @Override
     public File getDataFile() {
-         return new File(dataFilePath + "/" + dataFileName);
+        return new File(dataFilePath + "/" + dataFileName);
     }
 
-    @Override
+      @Override
     public File getDataFile1() {
-        return new File(dataFilePath + "/" + dataFile1Name);
-    }
+       return new File(dataFilePath + "/" + dataFile1Name);
+     }
 
-}
+
+  }

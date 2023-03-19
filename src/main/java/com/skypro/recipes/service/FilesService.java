@@ -16,7 +16,8 @@ public interface FilesService {
 
   boolean cleanDataFile1();
 
-    File getDataFile();
+
+  File getDataFile();
 
   File getDataFile1();
 }
