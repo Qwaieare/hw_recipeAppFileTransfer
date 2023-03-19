@@ -12,4 +12,6 @@ public interface IngredientService {
     Ingredient putIngredient(Long idIng, Ingredient ingredient);
 
     boolean deleteIngredient(Long idIng);
+
+    boolean deleteAllIngredient();
 }

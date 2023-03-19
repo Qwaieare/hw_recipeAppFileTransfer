@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/ingredient")
+@RequestMapping("/Ingredient")
 @Tag(name = "Ингредиенты", description = "Ингредиенты для составления рецептов")
 public class IngredientController {
 
@@ -25,6 +25,11 @@ public class IngredientController {
         this.ingredientService = ingredientService;
     }
 
+    @PostMapping
+    public ResponseEntity<Long> addNewIngredient(@RequestBody Ingredient ingredient) {
+        Long idIng = ingredientService.addNewIngredient(ingredient);
+        return ResponseEntity.ok(idIng);
+    }
 
     @GetMapping("/{idIng}")
     public ResponseEntity<Ingredient> getIngredient(@PathVariable Long idIng) {
@@ -50,7 +55,7 @@ public class IngredientController {
                     }
             )
     }
-   )
+    )
     public ResponseEntity<Map<Long, Ingredient>> getAllIngredient() {
         Map<Long, Ingredient> ingredientsL = ingredientService.getAllIngredient();
         if (ingredientsL == null) {
@@ -61,18 +66,14 @@ public class IngredientController {
 
 
 
-    @PostMapping
-    public ResponseEntity<Long> addNewIngredient(@RequestBody Ingredient ingredient) {
-        Long idIng = ingredientService.addNewIngredient(ingredient);
-        return ResponseEntity.ok(idIng);
-    }
+
 
 
     @PutMapping("/{idIng}")
     @Parameters(value = {
             @Parameter(name = "idIng", example = "ingredient")
     }
-  )
+    )
     public ResponseEntity<Ingredient> putIngredient(@PathVariable Long idIng, @RequestBody Ingredient ingredient) {
         Ingredient ingredient1 = ingredientService.putIngredient(idIng, ingredient);
         if (ingredient1 == null) {
@@ -80,6 +81,8 @@ public class IngredientController {
         }
         return ResponseEntity.ok(ingredient);
     }
+
+
 
     @DeleteMapping("/{idIng}")
     public ResponseEntity<Void> deleteIngredient(@PathVariable Long idIng) {

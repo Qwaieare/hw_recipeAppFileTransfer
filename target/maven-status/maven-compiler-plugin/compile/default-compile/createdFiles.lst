@@ -1,0 +1,16 @@
+com\skypro\recipes\service\RecipeService.class
+com\skypro\recipes\controller\FilesController.class
+com\skypro\recipes\model\Ingredient.class
+com\skypro\recipes\impl\FilesServiceImpl.class
+com\skypro\recipes\impl\RecipeServiceImpl$1.class
+com\skypro\recipes\controller\RecipeController.class
+com\skypro\recipes\controller\InfoController.class
+com\skypro\recipes\service\IngredientService.class
+com\skypro\recipes\impl\IngredientServiceImpl$1.class
+com\skypro\recipes\RecipesAppLication.class
+com\skypro\recipes\controller\IngredientController.class
+com\skypro\recipes\model\Recipe.class
+com\skypro\recipes\impl\IngredientServiceImpl.class
+com\skypro\recipes\impl\RecipeServiceImpl.class
+com\skypro\recipes\service\FilesService.class
+org\example\App.class

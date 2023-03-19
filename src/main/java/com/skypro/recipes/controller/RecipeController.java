@@ -57,8 +57,8 @@ public class RecipeController {
             )
     }
 
-   )
-     public  ResponseEntity<Map<Long, Recipe>> getAllRecipe()  {
+    )
+    public  ResponseEntity<Map<Long, Recipe>> getAllRecipe()  {
         Map<Long, Recipe> recipeL = recipeService.getAllRecipe();
         if (recipeL == null) {
             return ResponseEntity.notFound().build();
@@ -69,12 +69,11 @@ public class RecipeController {
 
 
 
-
     @PutMapping("/{idRec}")
     @Parameters(value = {
             @Parameter(name = "idRec", example = "recipe")
     }
-  )
+    )
     public ResponseEntity<Recipe> putRecipe(@PathVariable Long idRec, @RequestBody Recipe recipe) {
         Recipe recipe1 = recipeService.putRecipe(idRec, recipe);
         if (recipe1 == null) {
@@ -99,3 +98,4 @@ public class RecipeController {
     }
 
 }
+

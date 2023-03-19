@@ -9,11 +9,11 @@
         <relativePath/>
     </parent>
     <groupId>org.example</groupId>
-    <artifactId>hw_recipeApp20230306</artifactId>
+    <artifactId>hw_recipeAppFileTransfer</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>hw_recipeApp20230306</name>
+    <name>hw_recipeAppFileTransfer</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -40,11 +40,24 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.12.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.6.14</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

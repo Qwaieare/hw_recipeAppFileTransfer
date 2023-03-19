@@ -1,6 +1,7 @@
 package com.skypro.recipes.impl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.skypro.recipes.model.Recipe;
 import com.skypro.recipes.service.FilesService;
@@ -12,7 +13,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 @Service
-    public class RecipeServiceImpl implements RecipeService {
+public class RecipeServiceImpl implements RecipeService {
 
     private static Map<Long, Recipe> recipeL = new TreeMap<>();
     private static Long idRec = 0L;
@@ -31,7 +32,7 @@ import java.util.TreeMap;
 
     @Override
     public Recipe getRecipe(Long idRec) {
-         return recipeL.get(idRec);
+        return recipeL.get(idRec);
     }
 
     @Override
@@ -62,7 +63,7 @@ import java.util.TreeMap;
     // методы для json
     private void saveToFile() {
         try {
-           String json = new ObjectMapper().writeValueAsString(recipeL);
+            String json = new ObjectMapper().writeValueAsString(recipeL);
             filesService.saveToFile(json);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
@@ -70,22 +71,22 @@ import java.util.TreeMap;
     }
 
     private void readFromFile() {
-         String json = filesService.readFromFile();
+        String json = filesService.readFromFile();
         try {
             recipeL = new ObjectMapper().readValue(json, new TypeReference<TreeMap<Long, Recipe>>() {
             });
+        } catch (JsonMappingException e) {
+
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
     }
 
-        @PostConstruct
-        private void init () {
-            readFromFile();
-        }
+    @PostConstruct
+    private void init () {
+        readFromFile();
     }
-
-
+}
 
 
 
